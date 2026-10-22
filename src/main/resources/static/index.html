@@ -1,0 +1,350 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduNova | College & Student Portal</title>
+<style>
+:root {
+  --navy: #102747;
+  --blue: #2457d6;
+  --teal: #19b6a4;
+  --light: #f3f7fc;
+  --text: #24334b;
+  --muted: #69788e;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--white);
+}
+a { text-decoration: none; color: inherit; }
+button, input, select, textarea { font: inherit; }
+button, .btn { cursor: pointer; }
+.navbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px; padding: 16px 7%;
+  background: rgba(255,255,255,.97);
+  box-shadow: 0 3px 20px #10274712;
+}
+.brand { font-size: 23px; font-weight: 800; color: var(--navy); }
+.brand span { color: var(--teal); }
+.nav-links { display: flex; align-items: center; gap: 22px; }
+.nav-links a { font-size: 14px; font-weight: 600; }
+.nav-links a:hover { color: var(--blue); }
+.btn {
+  display: inline-block; border: 0; border-radius: 9px;
+  padding: 12px 18px; font-weight: 700; transition: .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--blue); color: white; }
+.btn-light { background: white; color: var(--navy); }
+.btn-teal { background: var(--teal); color: #062e35; }
+.menu-toggle {
+  display: none; background: none; border: 0;
+  font-size: 27px; color: var(--navy);
+}
+.hero {
+  background: linear-gradient(115deg,#102747f5,#1e4381eb),
+    radial-gradient(circle at 85% 15%,#19b6a4,transparent 35%);
+  color: white; padding: 85px 7% 75px;
+  display: grid; grid-template-columns: 1.3fr .7fr;
+  align-items: center; gap: 40px; overflow: hidden;
+}
+.eyebrow {
+  color: #76f0dc; font-size: 13px; font-weight: 800;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 { font-size: clamp(38px,5vw,64px); line-height: 1.08; margin: 18px 0; }
+.hero h1 span { color: #6de2d2; }
+.hero p { max-width: 590px; color: #e0e9f7; line-height: 1.8; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+.hero-card {
+  padding: 28px; border: 1px solid #ffffff35; border-radius: 24px;
+  background: #ffffff12; backdrop-filter: blur(10px);
+}
+.hero-card .big-icon { font-size: 65px; }
+.hero-card h3 { font-size: 24px; margin: 12px 0; }
+.hero-card p { font-size: 14px; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.hero-pills span { padding: 8px 11px; border-radius: 30px; background: #ffffff15; font-size: 12px; }
+.stats {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  padding: 28px 7%; background: var(--light); gap: 18px;
+}
+.stat { text-align: center; }
+.stat strong { color: var(--blue); display: block; font-size: 28px; }
+.stat span { color: var(--muted); font-size: 13px; }
+section { padding: 75px 7%; }
+.section-head { text-align: center; max-width: 650px; margin: 0 auto 35px; }
+.section-head small { color: var(--blue); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; }
+.section-head h2 { color: var(--navy); font-size: clamp(28px,4vw,40px); margin: 12px 0; }
+.section-head p { color: var(--muted); line-height: 1.7; }
+.grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.card {
+  padding: 25px; border: 1px solid #e6ecf5; border-radius: 17px;
+  background: white; transition: .25s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px #10274712; }
+.icon-box {
+  display: grid; place-items: center; width: 54px; height: 54px;
+  border-radius: 14px; background: #eaf0ff; font-size: 26px;
+}
+.card h3 { color: var(--navy); margin: 18px 0 10px; }
+.card p { color: var(--muted); line-height: 1.7; font-size: 14px; }
+.card a { color: var(--blue); font-weight: 700; font-size: 14px; }
+.course-tag { color: #078879; background: #e4faf6; padding: 6px 10px; border-radius: 20px; font-size: 12px; }
+.course-meta { display: flex; justify-content: space-between; gap: 10px; margin: 15px 0; font-size: 12px; color: var(--muted); }
+.soft { background: var(--light); }
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: start; }
+.panel {
+  background: white; border: 1px solid #e5ebf4; border-radius: 18px;
+  padding: 28px; box-shadow: 0 10px 35px #10274708;
+}
+.panel h3 { color: var(--navy); margin-top: 0; }
+.field { margin: 15px 0; }
+.field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 7px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 12px 13px; border: 1px solid #dce4ef;
+  border-radius: 8px; outline: none; background: #fbfdff;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--blue); box-shadow: 0 0 0 3px #2457d61a;
+}
+.full { width: 100%; }
+.notice { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.feature-list { display: grid; gap: 17px; margin-top: 25px; }
+.feature { display: flex; gap: 14px; align-items: flex-start; }
+.feature b { color: var(--navy); }
+.feature p { margin: 5px 0 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.feature-icon { font-size: 23px; }
+.login-area { background: linear-gradient(120deg,#102747,#203e72); color: white; }
+.login-area .section-head h2 { color: white; }
+.login-area .section-head p { color: #d7e2f2; }
+.login-area .panel { color: var(--text); max-width: 480px; width: 100%; margin: auto; }
+.login-area .panel a { color: var(--blue); }
+.contact-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+footer { background: #0b1b32; color: #d8e2f1; padding: 35px 7%; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+footer p { font-size: 13px; line-height: 1.7; }
+footer a { color: #83e6d8; }
+.toast {
+  position: fixed; bottom: 22px; right: 22px; z-index: 30;
+  max-width: 330px; padding: 15px 18px; border-radius: 10px;
+  background: var(--navy); color: white; box-shadow: 0 10px 30px #0002;
+  display: none;
+}
+@media(max-width:900px) {
+  .navbar { padding: 14px 5%; }
+  .menu-toggle { display: block; }
+  .nav-links {
+    display: none; position: absolute; top: 65px; left: 0; right: 0;
+    padding: 22px 6%; background: white; flex-direction: column;
+    align-items: stretch; box-shadow: 0 12px 20px #10274712;
+  }
+  .nav-links.open { display: flex; }
+  .hero { grid-template-columns: 1fr; padding: 60px 6%; }
+  .hero-card { max-width: 500px; }
+  .grid { grid-template-columns: repeat(2,1fr); }
+  .split { grid-template-columns: 1fr; }
+  section { padding: 60px 6%; }
+}
+@media(max-width:580px) {
+  .grid, .stats, .contact-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 39px; }
+  .stats { padding: 25px 5%; }
+  .stat strong { font-size: 23px; }
+  .grid .card { padding: 18px; }
+}
+@media(max-width:380px) {
+  .grid, .stats, .contact-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="#home" class="brand">Edu<span>Nova</span> 🎓</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+  <nav class="nav-links" id="navLinks">
+    <a href="#home">⌂ Home</a>
+    <a href="#about">▣ About</a>
+    <a href="#courses">▤ Courses</a>
+    <a href="#register">✎ Register</a>
+    <a href="#login">♙ Login</a>
+    <a href="#contact">✉ Contact</a>
+  </nav>
+  <a class="btn btn-primary desktop-register" href="#register">Get Started ↗</a>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <div class="eyebrow">✦ Learn today. Lead tomorrow.</div>
+    <h1>Build your future<br>with <span>EduNova.</span></h1>
+    <p>A welcoming place to learn, explore your potential, and prepare for a successful career. Discover courses and take your next step with confidence.</p>
+    <div class="hero-actions">
+      <a class="btn btn-teal" href="#courses">Explore Courses →</a>
+      <a class="btn btn-light" href="#register">✎ Student Registration</a>
+    </div>
+    <div class="hero-pills">
+      <span>✓ Career-focused learning</span>
+      <span>✓ Student-first experience</span>
+      <span>✓ Learn and grow</span>
+    </div>
+  </div>
+  <div class="hero-card">
+    <div class="big-icon">🎓</div>
+    <div class="eyebrow">Your journey starts here</div>
+    <h3>Knowledge. Skills. Opportunity.</h3>
+    <p>Explore your interests, develop practical skills, and take the next step in your education.</p>
+    <a class="btn btn-teal" href="#about">Discover EduNova ↗</a>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><strong>01</strong><span>Student Portal</span></div>
+  <div class="stat"><strong>06+</strong><span>Learning Areas</span></div>
+  <div class="stat"><strong>24/7</strong><span>Website Access</span></div>
+  <div class="stat"><strong>100%</strong><span>Learning Potential</span></div>
+</div>
+
+<section id="about">
+  <div class="section-head">
+    <small>About EduNova</small>
+    <h2>A smarter way to manage your learning journey</h2>
+    <p>Discover courses, register as a student, and find essential information in one easy-to-use place.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="icon-box">🎯</div><h3>Our Mission</h3><p>Make learning information accessible and help students take informed steps toward their goals.</p></article>
+    <article class="card"><div class="icon-box">💡</div><h3>Our Approach</h3><p>Bring course information and student services together in a simple, clear digital experience.</p></article>
+    <article class="card"><div class="icon-box">🤝</div><h3>Student Support</h3><p>Make it easy to discover programs, register, and find contact information when you need it.</p></article>
+  </div>
+</section>
+
+<section class="soft" id="courses">
+  <div class="section-head">
+    <small>Explore Programs</small>
+    <h2>Find a course that inspires you</h2>
+    <p>Explore example learning areas. Replace these descriptions with your college's actual programs and eligibility requirements.</p>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="icon-box">💻</div><span class="course-tag">Technology</span><h3>Computer Applications</h3><p>Explore programming, databases, software development, and web technologies.</p><div class="course-meta"><span>📘 Computing</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+    <article class="card"><div class="icon-box">📊</div><span class="course-tag">Business</span><h3>Business & Management</h3><p>Learn about business operations, management concepts, and decision-making.</p><div class="course-meta"><span>📘 Business</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+    <article class="card"><div class="icon-box">📈</div><span class="course-tag">Technology</span><h3>Data Analytics</h3><p>Discover how data, reporting, and analytical thinking can solve problems.</p><div class="course-meta"><span>📘 Analytics</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+    <article class="card"><div class="icon-box">🌐</div><span class="course-tag">Technology</span><h3>Web Development</h3><p>Explore web design, frontend interfaces, and backend application concepts.</p><div class="course-meta"><span>📘 Web</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+    <article class="card"><div class="icon-box">🤖</div><span class="course-tag">Innovation</span><h3>AI & Machine Learning</h3><p>Get introduced to intelligent systems, data-driven models, and AI concepts.</p><div class="course-meta"><span>📘 AI</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+    <article class="card"><div class="icon-box">🗄️</div><span class="course-tag">Technology</span><h3>Database Systems</h3><p>Understand data organization, SQL queries, and database management.</p><div class="course-meta"><span>📘 Databases</span><span>Career skills</span></div><a href="#register">Register interest →</a></article>
+  </div>
+</section>
+
+<section id="register">
+  <div class="section-head">
+    <small>Join Our Community</small>
+    <h2>Student registration</h2>
+    <p>Submit your details. This form connects to your existing Spring Boot registration endpoint and MySQL database.</p>
+  </div>
+  <div class="split">
+    <div>
+      <h2 style="color:var(--navy);font-size:32px">Start your next chapter.</h2>
+      <p style="color:var(--muted);line-height:1.8">Complete the form accurately. After submission, the application will save your record and show a confirmation page.</p>
+      <div class="feature-list">
+        <div class="feature"><span class="feature-icon">📝</span><div><b>Simple registration</b><p>Enter your basic details in a few easy steps.</p></div></div>
+        <div class="feature"><span class="feature-icon">🔒</span><div><b>Database-backed records</b><p>Student registration is stored by your Spring Boot application in MySQL.</p></div></div>
+        <div class="feature"><span class="feature-icon">🎓</span><div><b>Course interest</b><p>Select your course and let the college know what you want to study.</p></div></div>
+      </div>
+    </div>
+    <form class="panel" action="/students/register" method="post">
+      <h3>✎ Create a student record</h3>
+      <div class="field"><label for="name">Full name *</label><input id="name" name="name" required maxlength="100" placeholder="Enter your full name"></div>
+      <div class="field"><label for="email">Email address *</label><input id="email" name="email" type="email" required maxlength="150" placeholder="you@example.com"></div>
+      <div class="field"><label for="course">Course *</label>
+        <select id="course" name="course" required>
+          <option value="">Select a course</option>
+          <option>MCA</option><option>BCA</option><option>BBA</option>
+          <option>B.Com</option><option>Computer Science</option>
+          <option>Web Development</option><option>Data Analytics</option>
+          <option>AI & Machine Learning</option><option>Other</option>
+        </select>
+      </div>
+      <div class="field"><label for="phone">Phone number *</label><input id="phone" name="phone" type="tel" required pattern="[0-9+() -]{7,20}" maxlength="20" placeholder="Enter your phone number"></div>
+      <button class="btn btn-primary full" type="submit">Submit Registration →</button>
+      <p class="notice">By submitting, you confirm that the information provided is accurate.</p>
+    </form>
+  </div>
+</section>
+
+<section class="login-area" id="login">
+  <div class="section-head">
+    <small>Student Access</small>
+    <h2>Welcome back!</h2>
+    <p>A dedicated space for students to access college services.</p>
+  </div>
+  <form class="panel" id="loginForm">
+    <h3>♙ Student login</h3>
+    <p class="notice">Login interface preview — authentication is not yet connected.</p>
+    <div class="field"><label for="loginEmail">Email address</label><input id="loginEmail" type="email" required placeholder="Enter your email"></div>
+    <div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" required placeholder="Enter your password"></div>
+    <button class="btn btn-primary full" type="submit">Login →</button>
+    <p class="notice">New student? <a href="#register">Register here</a></p>
+  </form>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <small>Get in Touch</small>
+    <h2>We're here to help</h2>
+    <p>Replace the sample information below with your college's official contact details.</p>
+  </div>
+  <div class="contact-grid">
+    <article class="card"><div class="icon-box">✉️</div><h3>Email</h3><p>Add your college's official email address here.</p></article>
+    <article class="card"><div class="icon-box">📍</div><h3>Campus</h3><p>Add your college address and location here.</p></article>
+    <article class="card"><div class="icon-box">☎️</div><h3>Phone</h3><p>Add your college's official contact number here.</p></article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-row">
+    <div><a class="brand" href="#home">Edu<span>Nova</span> 🎓</a><p>Learn. Grow. Achieve.</p></div>
+    <div><a href="#about">About</a> &nbsp;·&nbsp; <a href="#courses">Courses</a> &nbsp;·&nbsp; <a href="#register">Register</a> &nbsp;·&nbsp; <a href="#contact">Contact</a></div>
+  </div>
+  <p>© <span id="year"></span> EduNova College Portal. Customize this template for your institution.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+  menuToggle.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navLinks a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.textContent = "☰";
+  });
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+document.getElementById("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const toast = document.getElementById("toast");
+  toast.textContent = "Login is a design preview. Backend authentication still needs to be implemented.";
+  toast.style.display = "block";
+  window.setTimeout(() => toast.style.display = "none", 4500);
+});
+</script>
+</body>
+</html>
